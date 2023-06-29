@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Usuario {
+    
     @Id
     @GeneratedValue( generator = "uuid")
     @GenericGenerator( name = "uuid", strategy = "uuid2")

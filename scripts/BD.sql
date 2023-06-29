@@ -18,6 +18,14 @@ create table LIBRO (
    constraint PK_LIBRO primary key (ISBN)	
 );
 
+create table USUARIO (
+  	ID      VARCHAR(255)         not null,
+   	EMAIL   VARCHAR(30)         not null,
+	NOMBRE VARCHAR(36)    not null,
+	PASSWORD VARCHAR(255)	not null,
+	ROL VARCHAR(36) not null,
+   constraint PK_USUARIO primary key (ID)	
+);
 alter table LIBRO
    add constraint FK_AUTOR foreign key (FKAUTOR)
       references AUTOR (ID)
@@ -31,8 +39,11 @@ alter table LIBRO
 select * from autor;
 select * from editorial;
 select * from LIBRO;
+select * from USUARIO;
 
-	  
+SELECT u FROM usuario u WHERE u.email = 'kevin@gmail.com';
+
+insert into USUARIO values ('123456', 'kevin@gmail.com','kevin','12345678','USER');
 	  
 	  
 	  

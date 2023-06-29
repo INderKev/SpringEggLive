@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 import com.egg.biblioteca.entidades.Editorial;
-import com.egg.biblioteca.entidades.Libro;
 import com.egg.biblioteca.excepciones.MyException;
 import com.egg.biblioteca.repository.EditorialRepositorio;
 
