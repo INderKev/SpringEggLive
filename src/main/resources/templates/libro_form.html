@@ -13,8 +13,16 @@
         <input type="number" name="isbn" placeholder="ISBN" >
         <input type="text" name="titulo" placeholder="Titulo">
         <input type="number" name="ejemplares" placeholder="ejemplares">
-        <input type="text" name="idAutor" placeholder="Id del autor">
-        <input type="text" name="idEditorial" placeholder="Id de la editorial">
+        <select name="idAutor" id="">
+            <option>Seleccione un autor</option>
+            <option th:each="autor : ${autores}" th:value="${autor.id}" th:text="${autor.nombre}"/>
+        </select>
+        <select name="idEditorial" id="">
+            <option>Seleccione una editorial</option>
+            <option th:each="editorial : ${editoriales}" 
+                    th:value="${editorial.id}" 
+                    th:text="${editorial.nombre}"/>
+        </select>
         <button type="submit">Guardar</button>
     </form>
 

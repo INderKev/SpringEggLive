@@ -10,11 +10,11 @@ create table EDITORIAL (
 );
 create table LIBRO (
    ISBN     numeric (13)         not null,
-   NOMBRE   VARCHAR(30)         not null,
+   TITULO   VARCHAR(30)         not null,
 	EJEMPLARES INTEGER    not null,
 	ALTA DATE	not null,
-	FKAUTOR VARCHAR(36) not null,
-	FKEDITORIAL      VARCHAR(36)     not null,
+	AUTOR_ID VARCHAR(36) not null,
+	EDITORIAL_ID      VARCHAR(36)     not null,
    constraint PK_LIBRO primary key (ISBN)	
 );
 
@@ -28,8 +28,10 @@ alter table LIBRO
       references EDITORIAL (ID)
  on delete restrict on update restrict;
 	 
-	 
-	 select * from autor;
+select * from autor;
+select * from editorial;
+select * from LIBRO;
+
 	  
 	  
 	  

@@ -1,6 +1,8 @@
 package com.egg.biblioteca.servicios;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,12 @@ public class AutorServicio {
 
     public AutorServicio(AutorRepositorio autorRepo){
         this.autorRepositorio = autorRepo;
+    }
+
+    public List<Autor> listarAutores(){
+        List<Autor> autores = new ArrayList();
+        autores = autorRepositorio.findAll();
+        return autores;
     }
 
     //el id es generado de manera automatica
