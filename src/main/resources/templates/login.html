@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <form th:action="@{/logincheck}" method="post">
+        <h3>Accede a la biblioteca</h3>
+        <input type="email" name="email" placeholder="EMAIL">
+        <input type="password" name="password" placeholder="CONTRASEÑA">
+        <button type="submit">Ingresar</button>
+    </form>
+
+    <div th:if="${error != null}">
+        <h5>Error</h5>
+        <p th:text="${error}"></p>
+    </div>
+
+    <div th:if="${exito != null}">
+        <h5>Se guardo exitosamente</h5>
+        <p th:text="${exito}"></p>
+    </div>
+</body>
+</html>

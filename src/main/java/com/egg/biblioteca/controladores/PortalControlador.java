@@ -14,21 +14,21 @@ import com.egg.biblioteca.servicios.UsuarioServicio;
 @RequestMapping
 public class PortalControlador {
 
-	/* 
+	
 
 	private UsuarioServicio usuarioServicio;
 
 	public PortalControlador(UsuarioServicio usuServicio){
 		this.usuarioServicio = usuServicio;
 	}
-	*/
+	
 	
 	@GetMapping("/")
 	public String index(){
 		return "index.html";
 	}
 
-	/*
+	
 
 	@GetMapping("/registrar")
 	public String registrar(){
@@ -55,6 +55,21 @@ public class PortalControlador {
 		}
 		
 	}
-	 */
+	 
+	@GetMapping("/login")
+	public String login(
+		@RequestParam(required = false) String error,
+		ModelMap modelo
+	){
+		if (error!=null) {
+			modelo.put("error","usuario o contraseña invalida");
+		}
+		return "login.html";
+	}
+
+	@GetMapping("/inicio")
+	public String inicio(){
+		return "inicio.html";
+	}
 
 }

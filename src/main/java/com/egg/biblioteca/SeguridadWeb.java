@@ -25,7 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @EnableWebSecurity
 public class SeguridadWeb{
 
-    /* 
+    
 
     public UsuarioServicio usuarioServicio;
 
@@ -38,26 +38,41 @@ public class SeguridadWeb{
         auth.userDetailsService(usuarioServicio)
         .passwordEncoder(new BCryptPasswordEncoder());
     }
-    */
+    
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http)throws Exception{
         http
-             .authorizeHttpRequests((authorize) -> authorize
-
-             .requestMatchers("/libro/**").permitAll()
-             .requestMatchers("/user/**").hasRole("USER")
-             .requestMatchers("/admin/**").hasRole("ADMIN")
-
-             .anyRequest().authenticated()
-        );
+            .authorizeHttpRequests((authorize) -> authorize
+                .requestMatchers("/**")
+                    .permitAll()               
+                .requestMatchers("/user/**").hasRole("USER")
+                .requestMatchers("/admin/**").hasRole("ADMIN")
+                .anyRequest().authenticated()
+            )
+            .formLogin(formLogin ->
+                formLogin
+                    .loginPage("/login")
+                    .loginProcessingUrl("/logincheck")
+                    .usernameParameter("email")
+                    .passwordParameter("password")
+                    .defaultSuccessUrl( "/inicio")
+                    .permitAll()
+            )
+            .logout(logout ->
+                logout
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/")
+                    .permitAll()
+            )              
+        ;
 
          http.formLogin(withDefaults());
         http.httpBasic(withDefaults());
 
 
          return http.build();
-    } 
-
+    }
+    
     /* 
     @Bean
     protected SecurityFilterChain filterChain(HttpSecurity http)throws Exception{
@@ -86,5 +101,6 @@ public class SeguridadWeb{
          return new InMemoryUserDetailsManager(user, admin);
      }
      */
+     
     
 }

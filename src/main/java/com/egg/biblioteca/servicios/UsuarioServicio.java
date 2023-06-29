@@ -1,5 +1,5 @@
 package com.egg.biblioteca.servicios;
-/* 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-*/
+
 import org.springframework.stereotype.Service;
 
 import com.egg.biblioteca.excepciones.MyException;
@@ -23,9 +23,9 @@ import com.egg.biblioteca.enumeraciones.Rol;
 import jakarta.transaction.Transactional;
 
 
-//public class UsuarioServicio implements UserDetailsService{
+
 @Service
-public class UsuarioServicio {
+public class UsuarioServicio implements UserDetailsService{
 
     private UsuarioRepositorio usuarioRepositorio;
 
@@ -39,8 +39,8 @@ public class UsuarioServicio {
         Usuario usuario  = new Usuario();
         usuario.setNombre(nombre);
         usuario.setEmail(email);
-        //usuario.setPassword(new BCryptPasswordEncoder().encode(password));
-        usuario.setPassword(password);
+        usuario.setPassword(new BCryptPasswordEncoder().encode(password));
+        //usuario.setPassword(password);
         usuario.setRol(Rol.USER);
         usuarioRepositorio.save(usuario);
     }
@@ -58,7 +58,7 @@ public class UsuarioServicio {
     }
 
     //el email es con lo que se autentica a cada uno de los usuario
-    /* 
+    
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Usuario usuario = usuarioRepositorio.buscarPorEmail(email);
@@ -75,6 +75,6 @@ public class UsuarioServicio {
             return null;
         }
     }
-    */
+    
 
 }
