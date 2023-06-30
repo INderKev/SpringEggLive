@@ -12,7 +12,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
 
 import com.egg.biblioteca.excepciones.MyException;
 import com.egg.biblioteca.repository.UsuarioRepositorio;
@@ -20,6 +24,7 @@ import com.egg.biblioteca.repository.UsuarioRepositorio;
 import com.egg.biblioteca.entidades.Usuario;
 import com.egg.biblioteca.enumeraciones.Rol;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 
 
@@ -68,6 +73,12 @@ public class UsuarioServicio implements UserDetailsService{
             GrantedAuthority p = new SimpleGrantedAuthority("ROLE_"+usuario.getRol().toString()); // ROLE_USER
 
             permisos.add(p);
+
+            //GUARDAR EN SESIÓN WEB recupera los atributos del request
+            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+            HttpSession sesion = attr.getRequest().getSession(true);
+            //guarda todos los datos del usuario autenticado
+            sesion.setAttribute("usuariosesion", usuario);
 
             //User(nombre, contraseña, colección de permisos)
             return  new User(usuario.getEmail(), usuario.getPassword(), permisos );

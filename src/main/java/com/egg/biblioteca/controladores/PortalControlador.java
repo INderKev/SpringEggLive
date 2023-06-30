@@ -1,5 +1,6 @@
 package com.egg.biblioteca.controladores;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,7 +8,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.egg.biblioteca.entidades.Usuario;
 import com.egg.biblioteca.servicios.UsuarioServicio;
+
+import jakarta.servlet.http.HttpSession;
 
 
 @Controller
@@ -68,7 +72,12 @@ public class PortalControlador {
 	}
 
 	@GetMapping("/inicio")
-	public String inicio(){
+	public String inicio(HttpSession sesion){
+		// se crea un usuario con todos los datos de la sesion
+		Usuario usuarioLogueado = (Usuario) sesion.getAttribute("usuariosesion");
+		if (usuarioLogueado.getRol().toString().equals("ADMIN")) {
+			return "redirect:/admin/dashboard";
+		}
 		return "inicio.html";
 	}
 

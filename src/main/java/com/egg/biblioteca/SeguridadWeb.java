@@ -43,6 +43,7 @@ public class SeguridadWeb{
     SecurityFilterChain filterChain(HttpSecurity http)throws Exception{
         http
             .authorizeHttpRequests((authorize) -> authorize
+                .requestMatchers("/inicio").hasRole("USER")
                 .requestMatchers("/**")
                     .permitAll()               
                 .requestMatchers("/user/**").hasRole("USER")
@@ -63,7 +64,10 @@ public class SeguridadWeb{
                     .logoutUrl("/logout")
                     .logoutSuccessUrl("/")
                     .permitAll()
-            )              
+            )            
+            .csrf(csrf -> csrf
+                .disable()
+            )  
         ;
 
          http.formLogin(withDefaults());
